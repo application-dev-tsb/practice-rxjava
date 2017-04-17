@@ -14,6 +14,19 @@ public class StringIteration {
         List<String> list = Arrays.asList("A", "B", "C", "D");
 
         Observable<String> observable = Observable.fromIterable(list);
-        observable.subscribe(System.out::println);
+        observable.subscribe(StringIteration::onAction, StringIteration::onError, StringIteration::onDone);
     }
+
+    private static void onAction(String element) {
+        System.out.println(element);
+    }
+
+    private static void onError(Throwable t) {
+        System.err.println("Error: " + t);
+    }
+
+    private static void onDone() {
+        System.out.println("Done!!!");
+    }
+
 }
